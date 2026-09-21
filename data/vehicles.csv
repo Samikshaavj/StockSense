@@ -1,0 +1,21 @@
+vehicle_id,brand,model,vehicle_type,engine_cc,fuel_type
+V01,Honda,Activa,scooter,110,Petrol
+V02,Honda,Shine,motorcycle,125,Petrol
+V03,Honda,SP 125,motorcycle,125,Petrol
+V04,Honda,Unicorn,motorcycle,160,Petrol
+V05,Hero,Splendor,motorcycle,100,Petrol
+V06,Hero,HF Deluxe,motorcycle,100,Petrol
+V07,Hero,Passion,motorcycle,110,Petrol
+V08,Hero,Glamour,motorcycle,125,Petrol
+V09,TVS,Jupiter,scooter,110,Petrol
+V10,TVS,Apache,motorcycle,160,Petrol
+V11,TVS,Raider,motorcycle,125,Petrol
+V12,TVS,Sport,motorcycle,100,Petrol
+V13,Bajaj,Pulsar,motorcycle,150,Petrol
+V14,Bajaj,Platina,motorcycle,100,Petrol
+V15,Bajaj,CT,motorcycle,100,Petrol
+V16,Suzuki,Access,scooter,125,Petrol
+V17,Suzuki,Gixxer,motorcycle,155,Petrol
+V18,Yamaha,FZ,motorcycle,150,Petrol
+V19,Yamaha,Fascino,scooter,125,Petrol
+V20,Yamaha,Ray,scooter,125,Petrol

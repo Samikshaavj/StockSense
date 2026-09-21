@@ -1,0 +1,190 @@
+product_id,product_name,category,subcategory,brand,part_number,vehicle_category,compatible_models,product_type,viscosity_grade,pack_size,unit,purchase_price_inr,selling_price_inr,minimum_stock_level,maximum_stock_level,initial_stock
+P001,Castrol Activ 4T,Lubricants,Engine Oil,Castrol,CAS-5506,universal,Universal,Consumable,20W-40,1.0,Litre,300,380,50,150,53
+P002,Motul 3000 4T Plus,Lubricants,Engine Oil,Motul,MOT-2679,universal,Universal,Consumable,20W-40,1.0,Litre,320,400,37,111,54
+P003,Motul 7100 4T,Lubricants,Engine Oil,Motul,MOT-2424,universal,Universal,Consumable,10W-50,1.0,Litre,750,900,20,100,89
+P004,Mak 4T Plus,Lubricants,Engine Oil,Mak,MAK-1488,universal,Universal,Consumable,20W-40,1.0,Litre,280,350,48,192,56
+P005,Castrol Scooter Oil,Lubricants,Engine Oil,Castrol,CAS-9279,specific,Scooter specific,Consumable,10W-30,0.8,Litre,250,320,32,96,61
+P006,Motul Scooter LE,Lubricants,Engine Oil,Motul,MOT-4257,specific,Scooter specific,Consumable,10W-30,0.8,Litre,280,350,49,147,120
+P007,Castrol Chain Lube,Lubricants,Chain Lube,Castrol,CAS-7873,specific,Motorcycle specific,Consumable,N/A,0.5,Litre,150,200,50,250,189
+P008,Motul Chain Lube,Lubricants,Chain Lube,Motul,MOT-5557,specific,Motorcycle specific,Consumable,N/A,0.4,Litre,180,250,37,148,112
+P009,Bosch Dot 3 Brake Fluid,Lubricants,Brake Fluid,Bosch,BOS-6574,universal,Universal,Consumable,Dot 3,0.25,Litre,80,120,10,30,23
+P010,Endurance Fork Oil,Lubricants,Fork Oil,Endurance,END-6514,universal,Universal,Consumable,20W,0.35,Litre,120,160,14,42,20
+P011,Rolon Clutch Plate,Clutch components,Clutch Plate,Rolon,ROL-2291,specific,V15,Spare Part,N/A,1.0,Piece,1458,1984,47,141,95
+P012,Amaron Speedometer Cable,Cables,Speedometer Cable,Amaron,AMA-4814,specific,V02,Spare Part,N/A,1.0,Piece,1531,2070,5,20,7
+P013,Rolon Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,Rolon,ROL-3803,specific,V09,Spare Part,N/A,1.0,Piece,1544,1863,20,100,29
+P014,Endurance Accelerator Cable,Cables,Accelerator Cable,Endurance,END-1916,specific,V18,Spare Part,N/A,1.0,Piece,1155,1728,13,65,33
+P015,NGK Brake Pad,Braking system,Brake Pad,NGK,NGK-7482,specific,V11,Spare Part,N/A,1.0,Piece,321,392,13,65,44
+P016,Endurance Tube,Tyres and tubes,Tube,Endurance,END-7543,universal,Universal,Spare Part,N/A,1.0,Piece,1060,1495,19,76,76
+P017,Endurance Battery,Electrical,Battery,Endurance,END-7916,universal,Universal,Spare Part,N/A,1.0,Piece,422,596,12,60,22
+P018,Rolon Fork Seal,Suspension,Fork Seal,Rolon,ROL-9797,specific,V01,Spare Part,N/A,1.0,Piece,1967,2626,20,100,34
+P019,Amaron Mudguard,Body parts,Mudguard,Amaron,AMA-2743,specific,V09,Spare Part,N/A,1.0,Piece,1252,1630,18,54,50
+P020,Amaron O-Ring,Gaskets and seals,O-Ring,Amaron,AMA-9005,specific,V18,Spare Part,N/A,1.0,Piece,864,1039,18,54,38
+P021,NGK Piston,Engine parts,Piston,NGK,NGK-8962,specific,V19,Spare Part,N/A,1.0,Piece,1309,1615,3,9,8
+P022,MRF Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,MRF,MRF-7932,specific,V06,Spare Part,N/A,1.0,Piece,575,794,6,30,25
+P023,Minda Brake Cable,Braking system,Brake Cable,Minda,MIN-5061,specific,V15,Spare Part,N/A,1.0,Piece,1684,2523,10,40,13
+P024,NGK Brake Pad,Braking system,Brake Pad,NGK,NGK-2104,specific,V03,Spare Part,N/A,1.0,Piece,2318,2852,50,150,79
+P025,Bosch Valve,Engine parts,Valve,Bosch,BOS-4981,specific,V05,Spare Part,N/A,1.0,Piece,1190,1647,19,95,79
+P026,Rolon Mudguard,Body parts,Mudguard,Rolon,ROL-2612,specific,V14,Spare Part,N/A,1.0,Piece,447,617,44,220,57
+P027,NGK Valve,Engine parts,Valve,NGK,NGK-4006,universal,Universal,Spare Part,N/A,1.0,Piece,497,614,9,27,22
+P028,Minda Oil Filter,Filters,Oil Filter,Minda,MIN-9856,specific,V18,Spare Part,N/A,1.0,Piece,358,467,3,9,8
+P029,Bosch Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,Bosch,BOS-7209,specific,V07,Spare Part,N/A,1.0,Piece,1018,1229,42,126,63
+P030,Gabriel Valve,Engine parts,Valve,Gabriel,GAB-5861,specific,V18,Spare Part,N/A,1.0,Piece,1913,2390,45,135,69
+P031,Exide Brake Pad,Braking system,Brake Pad,Exide,EXI-3579,universal,Universal,Spare Part,N/A,1.0,Piece,299,422,9,45,42
+P032,Bosch Timing Chain,Engine parts,Timing Chain,Bosch,BOS-1651,specific,V08,Spare Part,N/A,1.0,Piece,330,448,8,24,15
+P033,Rolon Fork Seal,Suspension,Fork Seal,Rolon,ROL-7484,specific,V07,Spare Part,N/A,1.0,Piece,2365,3152,7,21,11
+P034,CEAT Sprocket,Transmission,Sprocket,CEAT,CEA-4492,specific,V19,Spare Part,N/A,1.0,Piece,347,400,11,33,28
+P035,Endurance Speedometer Cable,Cables,Speedometer Cable,Endurance,END-9666,specific,V06,Spare Part,N/A,1.0,Piece,331,482,44,220,121
+P036,MRF Timing Chain,Engine parts,Timing Chain,MRF,MRF-3546,universal,Universal,Spare Part,N/A,1.0,Piece,474,700,11,33,28
+P037,Exide Oil Filter,Filters,Oil Filter,Exide,EXI-1832,specific,V09,Spare Part,N/A,1.0,Piece,1454,1775,18,72,34
+P038,Gabriel Clutch Cable,Clutch components,Clutch Cable,Gabriel,GAB-8007,specific,V09,Spare Part,N/A,1.0,Piece,1416,2010,35,175,148
+P039,Bosch Accelerator Cable,Cables,Accelerator Cable,Bosch,BOS-3088,specific,V19,Spare Part,N/A,1.0,Piece,660,885,47,141,102
+P040,NGK Valve,Engine parts,Valve,NGK,NGK-7658,specific,V08,Spare Part,N/A,1.0,Piece,213,311,3,12,11
+P041,Minda Fork Seal,Suspension,Fork Seal,Minda,MIN-5065,universal,Universal,Spare Part,N/A,1.0,Piece,775,1130,7,28,28
+P042,Bosch Air Filter,Filters,Air Filter,Bosch,BOS-4652,specific,V15,Spare Part,N/A,1.0,Piece,208,301,15,60,29
+P043,Minda Timing Chain,Engine parts,Timing Chain,Minda,MIN-7548,specific,V09,Spare Part,N/A,1.0,Piece,1191,1729,15,75,47
+P044,OEM Tube,Tyres and tubes,Tube,OEM,OEM-8119,universal,Universal,Spare Part,N/A,1.0,Piece,1119,1356,38,114,51
+P045,Rolon Bulb,Electrical,Bulb,Rolon,ROL-8144,universal,Universal,Spare Part,N/A,1.0,Piece,2144,2552,5,20,6
+P046,MRF Timing Chain,Engine parts,Timing Chain,MRF,MRF-3041,universal,Universal,Spare Part,N/A,1.0,Piece,857,1094,7,35,17
+P047,MRF Tail Light Assembly,Lighting,Tail Light Assembly,MRF,MRF-7211,specific,V18,Spare Part,N/A,1.0,Piece,1722,2176,12,36,25
+P048,Exide Tyre,Tyres and tubes,Tyre,Exide,EXI-6279,universal,Universal,Spare Part,N/A,1.0,Piece,1713,2298,14,42,27
+P049,CEAT Engine Bearing,Bearings,Engine Bearing,CEAT,CEA-5649,universal,Universal,Spare Part,N/A,1.0,Piece,2143,2819,4,20,6
+P050,Bosch Speedometer Cable,Cables,Speedometer Cable,Bosch,BOS-5011,specific,V07,Spare Part,N/A,1.0,Piece,1012,1402,4,12,4
+P051,CEAT Wheel Bearing,Bearings,Wheel Bearing,CEAT,CEA-3417,universal,Universal,Spare Part,N/A,1.0,Piece,2407,2931,17,68,32
+P052,Bosch Tyre,Tyres and tubes,Tyre,Bosch,BOS-5082,universal,Universal,Spare Part,N/A,1.0,Piece,946,1146,10,40,11
+P053,CEAT Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,CEAT,CEA-9270,specific,V20,Spare Part,N/A,1.0,Piece,1953,2702,40,160,118
+P054,Endurance Drive Chain,Chain and sprocket,Drive Chain,Endurance,END-4919,specific,V09,Spare Part,N/A,1.0,Piece,1994,2607,10,40,30
+P055,Bosch Oil Filter,Filters,Oil Filter,Bosch,BOS-4788,specific,V18,Spare Part,N/A,1.0,Piece,1010,1257,3,9,4
+P056,Minda Chain Sprocket Kit,Chain and sprocket,Chain Sprocket Kit,Minda,MIN-1320,specific,V02,Spare Part,N/A,1.0,Piece,1719,2175,36,144,85
+P057,CEAT O-Ring,Gaskets and seals,O-Ring,CEAT,CEA-9947,specific,V14,Spare Part,N/A,1.0,Piece,1490,1869,47,235,235
+P058,Minda Side Panel,Body parts,Side Panel,Minda,MIN-7624,universal,Universal,Spare Part,N/A,1.0,Piece,1167,1520,15,75,58
+P059,CEAT Headlight Bulb,Lighting,Headlight Bulb,CEAT,CEA-8022,specific,V19,Spare Part,N/A,1.0,Piece,2237,2593,30,90,71
+P060,Endurance Sprocket,Transmission,Sprocket,Endurance,END-7906,specific,V11,Spare Part,N/A,1.0,Piece,1602,2025,42,168,138
+P061,CEAT Air Filter,Filters,Air Filter,CEAT,CEA-1659,specific,V08,Spare Part,N/A,1.0,Piece,2259,2639,50,150,149
+P062,Minda Mirror,Body parts,Mirror,Minda,MIN-8619,specific,V16,Spare Part,N/A,1.0,Piece,133,181,33,165,88
+P063,NGK Tail Light Assembly,Lighting,Tail Light Assembly,NGK,NGK-1420,universal,Universal,Spare Part,N/A,1.0,Piece,519,738,39,117,113
+P064,Rolon Oil Filter,Filters,Oil Filter,Rolon,ROL-2983,specific,V08,Spare Part,N/A,1.0,Piece,862,1014,33,165,110
+P065,OEM Side Panel,Body parts,Side Panel,OEM,OEM-7882,universal,Universal,Spare Part,N/A,1.0,Piece,1804,2492,20,80,20
+P066,Bosch O-Ring,Gaskets and seals,O-Ring,Bosch,BOS-9817,specific,V05,Spare Part,N/A,1.0,Piece,1533,2103,16,48,33
+P067,CEAT Mudguard,Body parts,Mudguard,CEAT,CEA-8613,specific,V03,Spare Part,N/A,1.0,Piece,2476,3079,14,56,29
+P068,NGK Shock Absorber,Suspension,Shock Absorber,NGK,NGK-5526,specific,V09,Spare Part,N/A,1.0,Piece,1381,1676,40,160,152
+P069,MRF Accelerator Cable,Cables,Accelerator Cable,MRF,MRF-9041,specific,V18,Spare Part,N/A,1.0,Piece,400,493,37,185,158
+P070,Bosch Wheel Bearing,Bearings,Wheel Bearing,Bosch,BOS-9698,universal,Universal,Spare Part,N/A,1.0,Piece,1706,2374,19,76,49
+P071,MRF Indicator,Electrical,Indicator,MRF,MRF-6169,universal,Universal,Spare Part,N/A,1.0,Piece,1908,2375,11,55,23
+P072,Minda Clutch Plate,Clutch components,Clutch Plate,Minda,MIN-4180,specific,V17,Spare Part,N/A,1.0,Piece,2033,2534,19,76,25
+P073,NGK Air Filter,Filters,Air Filter,NGK,NGK-5786,universal,Universal,Spare Part,N/A,1.0,Piece,107,149,31,93,66
+P074,Amaron Headlight Bulb,Lighting,Headlight Bulb,Amaron,AMA-8216,universal,Universal,Spare Part,N/A,1.0,Piece,2060,2442,6,24,21
+P075,OEM Battery,Electrical,Battery,OEM,OEM-3485,universal,Universal,Spare Part,N/A,1.0,Piece,2006,2387,17,51,20
+P076,Bosch Sprocket,Transmission,Sprocket,Bosch,BOS-7232,specific,V20,Spare Part,N/A,1.0,Piece,535,719,49,147,115
+P077,Gabriel Engine Bearing,Bearings,Engine Bearing,Gabriel,GAB-4457,universal,Universal,Spare Part,N/A,1.0,Piece,1806,2269,3,9,8
+P078,Endurance Air Filter,Filters,Air Filter,Endurance,END-5771,universal,Universal,Spare Part,N/A,1.0,Piece,2310,2717,17,85,77
+P079,Gabriel Piston,Engine parts,Piston,Gabriel,GAB-9922,specific,V09,Spare Part,N/A,1.0,Piece,1909,2242,5,20,8
+P080,Endurance Brake Cable,Braking system,Brake Cable,Endurance,END-5728,universal,Universal,Spare Part,N/A,1.0,Piece,632,742,39,195,184
+P081,CEAT Wheel Bearing,Bearings,Wheel Bearing,CEAT,CEA-1653,universal,Universal,Spare Part,N/A,1.0,Piece,1698,2512,9,36,11
+P082,Exide Drive Chain,Chain and sprocket,Drive Chain,Exide,EXI-1659,specific,V19,Spare Part,N/A,1.0,Piece,424,521,19,57,36
+P083,CEAT Mirror,Body parts,Mirror,CEAT,CEA-9056,universal,Universal,Spare Part,N/A,1.0,Piece,1861,2736,19,76,59
+P084,NGK Clutch Cable,Clutch components,Clutch Cable,NGK,NGK-5722,specific,V11,Spare Part,N/A,1.0,Piece,1365,1889,16,80,79
+P085,MRF Tube,Tyres and tubes,Tube,MRF,MRF-9889,universal,Universal,Spare Part,N/A,1.0,Piece,410,516,42,210,42
+P086,OEM Engine Bearing,Bearings,Engine Bearing,OEM,OEM-5375,universal,Universal,Spare Part,N/A,1.0,Piece,1531,2094,44,132,70
+P087,Gabriel Accelerator Cable,Cables,Accelerator Cable,Gabriel,GAB-6091,specific,V20,Spare Part,N/A,1.0,Piece,2035,2426,13,65,23
+P088,MRF Accelerator Cable,Cables,Accelerator Cable,MRF,MRF-9165,specific,V15,Spare Part,N/A,1.0,Piece,970,1452,11,55,20
+P089,MRF Tail Light Assembly,Lighting,Tail Light Assembly,MRF,MRF-7284,specific,V08,Spare Part,N/A,1.0,Piece,1751,2525,9,45,18
+P090,MRF Brake Cable,Braking system,Brake Cable,MRF,MRF-1042,specific,V14,Spare Part,N/A,1.0,Piece,609,884,7,35,15
+P091,Exide Oil Filter,Filters,Oil Filter,Exide,EXI-9903,specific,V16,Spare Part,N/A,1.0,Piece,2055,2985,15,60,50
+P092,NGK Drive Chain,Chain and sprocket,Drive Chain,NGK,NGK-8749,specific,V14,Spare Part,N/A,1.0,Piece,1028,1387,2,8,7
+P093,Rolon Tail Light Assembly,Lighting,Tail Light Assembly,Rolon,ROL-2644,universal,Universal,Spare Part,N/A,1.0,Piece,673,890,46,230,130
+P094,Bosch O-Ring,Gaskets and seals,O-Ring,Bosch,BOS-8692,universal,Universal,Spare Part,N/A,1.0,Piece,1921,2219,20,60,24
+P095,NGK Mudguard,Body parts,Mudguard,NGK,NGK-8994,specific,V18,Spare Part,N/A,1.0,Piece,1678,2311,8,32,28
+P096,Exide Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,Exide,EXI-8269,specific,V14,Spare Part,N/A,1.0,Piece,1227,1839,33,165,58
+P097,OEM Sprocket,Transmission,Sprocket,OEM,OEM-3950,specific,V05,Spare Part,N/A,1.0,Piece,279,349,37,185,142
+P098,Bosch Gear Pinion,Transmission,Gear Pinion,Bosch,BOS-5161,specific,V19,Spare Part,N/A,1.0,Piece,1616,2208,4,12,11
+P099,Amaron Engine Bearing,Bearings,Engine Bearing,Amaron,AMA-6661,universal,Universal,Spare Part,N/A,1.0,Piece,1955,2864,35,105,91
+P100,Amaron Shock Absorber,Suspension,Shock Absorber,Amaron,AMA-7248,specific,V13,Spare Part,N/A,1.0,Piece,1074,1406,45,135,75
+P101,Exide Shock Absorber,Suspension,Shock Absorber,Exide,EXI-1803,specific,V13,Spare Part,N/A,1.0,Piece,1259,1457,14,42,32
+P102,Gabriel Shock Absorber,Suspension,Shock Absorber,Gabriel,GAB-3240,specific,V07,Spare Part,N/A,1.0,Piece,992,1351,6,30,30
+P103,Amaron Tyre,Tyres and tubes,Tyre,Amaron,AMA-2476,universal,Universal,Spare Part,N/A,1.0,Piece,1315,1875,7,35,11
+P104,Rolon Oil Filter,Filters,Oil Filter,Rolon,ROL-3695,specific,V12,Spare Part,N/A,1.0,Piece,591,842,46,230,115
+P105,Gabriel Oil Filter,Filters,Oil Filter,Gabriel,GAB-6992,specific,V03,Spare Part,N/A,1.0,Piece,1437,2057,4,12,10
+P106,OEM Clutch Cable,Clutch components,Clutch Cable,OEM,OEM-7086,specific,V09,Spare Part,N/A,1.0,Piece,556,727,19,76,71
+P107,CEAT Clutch Plate,Clutch components,Clutch Plate,CEAT,CEA-7689,specific,V03,Spare Part,N/A,1.0,Piece,2349,2971,50,200,127
+P108,OEM Clutch Plate,Clutch components,Clutch Plate,OEM,OEM-7367,universal,Universal,Spare Part,N/A,1.0,Piece,1296,1942,37,185,71
+P109,Amaron Engine Bearing,Bearings,Engine Bearing,Amaron,AMA-2622,universal,Universal,Spare Part,N/A,1.0,Piece,2262,2933,34,136,117
+P110,Exide O-Ring,Gaskets and seals,O-Ring,Exide,EXI-2627,specific,V15,Spare Part,N/A,1.0,Piece,1195,1387,17,51,40
+P111,MRF Tube,Tyres and tubes,Tube,MRF,MRF-4475,universal,Universal,Spare Part,N/A,1.0,Piece,1519,1779,33,132,44
+P112,OEM Tyre,Tyres and tubes,Tyre,OEM,OEM-4394,universal,Universal,Spare Part,N/A,1.0,Piece,1047,1566,5,15,13
+P113,Minda Fork Seal,Suspension,Fork Seal,Minda,MIN-5106,specific,V09,Spare Part,N/A,1.0,Piece,654,932,12,36,29
+P114,Bosch Mirror,Body parts,Mirror,Bosch,BOS-5347,specific,V08,Spare Part,N/A,1.0,Piece,155,185,7,21,9
+P115,Rolon Piston,Engine parts,Piston,Rolon,ROL-9254,specific,V17,Spare Part,N/A,1.0,Piece,310,408,19,57,47
+P116,OEM Brake Cable,Braking system,Brake Cable,OEM,OEM-7580,specific,V01,Spare Part,N/A,1.0,Piece,2185,2743,2,8,8
+P117,CEAT Chain Sprocket Kit,Chain and sprocket,Chain Sprocket Kit,CEAT,CEA-5505,universal,Universal,Spare Part,N/A,1.0,Piece,1866,2193,4,12,6
+P118,Rolon Shock Absorber,Suspension,Shock Absorber,Rolon,ROL-4522,specific,V14,Spare Part,N/A,1.0,Piece,2223,2785,33,165,62
+P119,Minda Drive Chain,Chain and sprocket,Drive Chain,Minda,MIN-5176,specific,V11,Spare Part,N/A,1.0,Piece,1907,2459,16,64,58
+P120,Amaron Battery,Electrical,Battery,Amaron,AMA-3131,universal,Universal,Spare Part,N/A,1.0,Piece,324,382,43,129,90
+P121,Exide Accelerator Cable,Cables,Accelerator Cable,Exide,EXI-1842,universal,Universal,Spare Part,N/A,1.0,Piece,2350,2973,41,205,149
+P122,NGK Oil Filter,Filters,Oil Filter,NGK,NGK-7022,specific,V08,Spare Part,N/A,1.0,Piece,2128,2605,33,132,104
+P123,Exide Clutch Cable,Clutch components,Clutch Cable,Exide,EXI-1430,specific,V20,Spare Part,N/A,1.0,Piece,1807,2612,19,95,90
+P124,OEM Shock Absorber,Suspension,Shock Absorber,OEM,OEM-2140,specific,V06,Spare Part,N/A,1.0,Piece,1315,1936,34,170,136
+P125,Bosch Gear Pinion,Transmission,Gear Pinion,Bosch,BOS-2391,specific,V06,Spare Part,N/A,1.0,Piece,931,1193,7,28,17
+P126,Endurance Piston,Engine parts,Piston,Endurance,END-7785,specific,V14,Spare Part,N/A,1.0,Piece,253,350,9,45,37
+P127,MRF Air Filter,Filters,Air Filter,MRF,MRF-6053,specific,V19,Spare Part,N/A,1.0,Piece,1810,2151,45,225,215
+P128,Rolon Piston,Engine parts,Piston,Rolon,ROL-6375,specific,V07,Spare Part,N/A,1.0,Piece,274,315,34,136,71
+P129,CEAT Clutch Plate,Clutch components,Clutch Plate,CEAT,CEA-2180,specific,V08,Spare Part,N/A,1.0,Piece,769,919,10,50,32
+P130,Rolon Chain Sprocket Kit,Chain and sprocket,Chain Sprocket Kit,Rolon,ROL-7843,specific,V19,Spare Part,N/A,1.0,Piece,368,534,42,210,205
+P131,Rolon Air Filter,Filters,Air Filter,Rolon,ROL-2734,specific,V15,Spare Part,N/A,1.0,Piece,1380,1670,41,123,96
+P132,Exide Brake Shoe,Braking system,Brake Shoe,Exide,EXI-2251,specific,V11,Spare Part,N/A,1.0,Piece,372,479,13,52,23
+P133,MRF Accelerator Cable,Cables,Accelerator Cable,MRF,MRF-5193,specific,V05,Spare Part,N/A,1.0,Piece,1481,1885,13,39,17
+P134,Exide Brake Pad,Braking system,Brake Pad,Exide,EXI-8354,specific,V16,Spare Part,N/A,1.0,Piece,358,433,44,220,192
+P135,Amaron Tube,Tyres and tubes,Tube,Amaron,AMA-1920,universal,Universal,Spare Part,N/A,1.0,Piece,1851,2172,14,56,51
+P136,Bosch CDI Unit,Electrical,CDI Unit,Bosch,BOS-2479,universal,Universal,Spare Part,N/A,1.0,Piece,1901,2211,14,42,34
+P137,CEAT Shock Absorber,Suspension,Shock Absorber,CEAT,CEA-9214,specific,V07,Spare Part,N/A,1.0,Piece,218,285,15,75,45
+P138,CEAT Gear Pinion,Transmission,Gear Pinion,CEAT,CEA-5059,universal,Universal,Spare Part,N/A,1.0,Piece,1456,2175,50,150,55
+P139,CEAT Tail Light Assembly,Lighting,Tail Light Assembly,CEAT,CEA-1857,specific,V13,Spare Part,N/A,1.0,Piece,700,894,16,64,59
+P140,Amaron Side Panel,Body parts,Side Panel,Amaron,AMA-3463,specific,V10,Spare Part,N/A,1.0,Piece,1400,1656,14,70,68
+P141,Exide Spark Plug,Electrical,Spark Plug,Exide,EXI-6072,universal,Universal,Spare Part,N/A,1.0,Piece,1482,1865,8,24,10
+P142,Amaron Speedometer Cable,Cables,Speedometer Cable,Amaron,AMA-7937,specific,V17,Spare Part,N/A,1.0,Piece,573,793,3,15,13
+P143,OEM Speedometer Cable,Cables,Speedometer Cable,OEM,OEM-3538,specific,V16,Spare Part,N/A,1.0,Piece,788,1168,13,39,17
+P144,Bosch Clutch Cable,Clutch components,Clutch Cable,Bosch,BOS-3147,specific,V02,Spare Part,N/A,1.0,Piece,2260,3259,20,80,76
+P145,Endurance Shock Absorber,Suspension,Shock Absorber,Endurance,END-8277,universal,Universal,Spare Part,N/A,1.0,Piece,728,1020,41,205,101
+P146,CEAT Shock Absorber,Suspension,Shock Absorber,CEAT,CEA-8218,specific,V16,Spare Part,N/A,1.0,Piece,1029,1294,13,52,49
+P147,Rolon Engine Bearing,Bearings,Engine Bearing,Rolon,ROL-1854,universal,Universal,Spare Part,N/A,1.0,Piece,1764,2625,19,57,35
+P148,NGK Tube,Tyres and tubes,Tube,NGK,NGK-3626,universal,Universal,Spare Part,N/A,1.0,Piece,470,657,11,44,16
+P149,MRF Oil Filter,Filters,Oil Filter,MRF,MRF-1872,specific,V15,Spare Part,N/A,1.0,Piece,1841,2176,41,123,94
+P150,Minda Drive Chain,Chain and sprocket,Drive Chain,Minda,MIN-6493,universal,Universal,Spare Part,N/A,1.0,Piece,384,491,11,55,52
+P151,Endurance Mirror,Body parts,Mirror,Endurance,END-2298,universal,Universal,Spare Part,N/A,1.0,Piece,1985,2766,45,180,46
+P152,Minda Valve,Engine parts,Valve,Minda,MIN-5934,specific,V14,Spare Part,N/A,1.0,Piece,2297,3397,3,12,6
+P153,Minda Clutch Plate,Clutch components,Clutch Plate,Minda,MIN-9443,specific,V16,Spare Part,N/A,1.0,Piece,1922,2252,19,95,21
+P154,Endurance Fork Seal,Suspension,Fork Seal,Endurance,END-2402,specific,V14,Spare Part,N/A,1.0,Piece,56,76,12,60,54
+P155,Bosch Speedometer Cable,Cables,Speedometer Cable,Bosch,BOS-1713,specific,V18,Spare Part,N/A,1.0,Piece,2278,3024,30,120,90
+P156,NGK Tube,Tyres and tubes,Tube,NGK,NGK-2698,universal,Universal,Spare Part,N/A,1.0,Piece,116,147,13,65,55
+P157,NGK Side Panel,Body parts,Side Panel,NGK,NGK-3986,specific,V06,Spare Part,N/A,1.0,Piece,1493,2002,44,220,166
+P158,Bosch Mirror,Body parts,Mirror,Bosch,BOS-9444,specific,V07,Spare Part,N/A,1.0,Piece,1924,2237,2,8,4
+P159,Gabriel Drive Chain,Chain and sprocket,Drive Chain,Gabriel,GAB-3039,specific,V02,Spare Part,N/A,1.0,Piece,832,1040,50,200,119
+P160,Rolon Mudguard,Body parts,Mudguard,Rolon,ROL-7018,specific,V06,Spare Part,N/A,1.0,Piece,1851,2708,9,45,40
+P161,Gabriel Side Panel,Body parts,Side Panel,Gabriel,GAB-2680,specific,V06,Spare Part,N/A,1.0,Piece,1788,2105,10,40,20
+P162,Amaron Clutch Cable,Clutch components,Clutch Cable,Amaron,AMA-6776,specific,V15,Spare Part,N/A,1.0,Piece,1876,2553,15,60,17
+P163,Gabriel Shock Absorber,Suspension,Shock Absorber,Gabriel,GAB-1510,specific,V12,Spare Part,N/A,1.0,Piece,284,334,10,50,20
+P164,OEM Sprocket,Transmission,Sprocket,OEM,OEM-3513,specific,V13,Spare Part,N/A,1.0,Piece,1016,1445,48,144,125
+P165,NGK Tube,Tyres and tubes,Tube,NGK,NGK-5566,universal,Universal,Spare Part,N/A,1.0,Piece,364,491,16,64,57
+P166,OEM Brake Pad,Braking system,Brake Pad,OEM,OEM-4515,specific,V04,Spare Part,N/A,1.0,Piece,2094,2787,6,24,20
+P167,CEAT Shock Absorber,Suspension,Shock Absorber,CEAT,CEA-6692,specific,V15,Spare Part,N/A,1.0,Piece,605,876,11,55,31
+P168,MRF Headlight Bulb,Lighting,Headlight Bulb,MRF,MRF-2988,specific,V06,Spare Part,N/A,1.0,Piece,1278,1850,15,75,29
+P169,Minda Brake Pad,Braking system,Brake Pad,Minda,MIN-2412,specific,V15,Spare Part,N/A,1.0,Piece,157,200,10,30,29
+P170,Rolon Clutch Cable,Clutch components,Clutch Cable,Rolon,ROL-2215,specific,V19,Spare Part,N/A,1.0,Piece,2010,2681,32,96,72
+P171,Amaron Engine Bearing,Bearings,Engine Bearing,Amaron,AMA-3114,universal,Universal,Spare Part,N/A,1.0,Piece,575,837,20,100,43
+P172,Bosch Chain Sprocket Kit,Chain and sprocket,Chain Sprocket Kit,Bosch,BOS-5653,specific,V08,Spare Part,N/A,1.0,Piece,1295,1563,15,75,72
+P173,Gabriel Engine Gasket Kit,Gaskets and seals,Engine Gasket Kit,Gabriel,GAB-3762,specific,V20,Spare Part,N/A,1.0,Piece,2306,2873,47,141,111
+P174,Endurance Fork Seal,Suspension,Fork Seal,Endurance,END-5336,specific,V01,Spare Part,N/A,1.0,Piece,1432,2069,3,9,8
+P175,Exide Tyre,Tyres and tubes,Tyre,Exide,EXI-8912,universal,Universal,Spare Part,N/A,1.0,Piece,174,230,14,70,33
+P176,Rolon Brake Cable,Braking system,Brake Cable,Rolon,ROL-4342,universal,Universal,Spare Part,N/A,1.0,Piece,348,484,16,64,45
+P177,Endurance CDI Unit,Electrical,CDI Unit,Endurance,END-9437,universal,Universal,Spare Part,N/A,1.0,Piece,1357,1909,16,48,39
+P178,NGK Accelerator Cable,Cables,Accelerator Cable,NGK,NGK-7293,specific,V04,Spare Part,N/A,1.0,Piece,551,685,10,40,40
+P179,Minda O-Ring,Gaskets and seals,O-Ring,Minda,MIN-9433,specific,V11,Spare Part,N/A,1.0,Piece,704,1010,36,108,99
+P180,Gabriel Engine Bearing,Bearings,Engine Bearing,Gabriel,GAB-6781,universal,Universal,Spare Part,N/A,1.0,Piece,418,618,13,39,31
+P181,Gabriel Piston,Engine parts,Piston,Gabriel,GAB-5333,universal,Universal,Spare Part,N/A,1.0,Piece,1977,2471,11,44,19
+P182,Rolon Tail Light Assembly,Lighting,Tail Light Assembly,Rolon,ROL-7329,specific,V12,Spare Part,N/A,1.0,Piece,1690,1973,18,72,22
+P183,MRF Speedometer Cable,Cables,Speedometer Cable,MRF,MRF-6990,universal,Universal,Spare Part,N/A,1.0,Piece,536,640,15,60,50
+P184,Minda Mirror,Body parts,Mirror,Minda,MIN-8761,universal,Universal,Spare Part,N/A,1.0,Piece,1694,2244,4,20,14
+P185,Endurance Speedometer Cable,Cables,Speedometer Cable,Endurance,END-5902,specific,V11,Spare Part,N/A,1.0,Piece,2161,2590,4,16,13
+P186,MRF Shock Absorber,Suspension,Shock Absorber,MRF,MRF-2795,specific,V16,Spare Part,N/A,1.0,Piece,2230,2946,2,8,4
+P187,Amaron Drive Chain,Chain and sprocket,Drive Chain,Amaron,AMA-1841,specific,V19,Spare Part,N/A,1.0,Piece,1993,2477,48,144,140
+P188,Endurance Shock Absorber,Suspension,Shock Absorber,Endurance,END-4125,specific,V02,Spare Part,N/A,1.0,Piece,1607,1931,19,95,33
+P189,NGK Valve,Engine parts,Valve,NGK,NGK-3262,specific,V20,Spare Part,N/A,1.0,Piece,1741,2422,17,85,24
