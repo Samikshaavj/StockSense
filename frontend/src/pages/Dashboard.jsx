@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getStockRisk, getReorderRecs, getDeadStock, getSalesAnalytics } from '../services/api';
-import type { StockRisk, ReorderRec, DeadStock, SalesAnalyticsResponse } from '../services/api';
+
 import { AlertTriangle, TrendingDown, Clock, Package, PlusCircle, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [stockRisk, setStockRisk] = useState<StockRisk[]>([]);
-  const [reorderRecs, setReorderRecs] = useState<ReorderRec[]>([]);
-  const [deadStock, setDeadStock] = useState<DeadStock[]>([]);
-  const [analytics, setAnalytics] = useState<SalesAnalyticsResponse | null>(null);
+  const [stockRisk, setStockRisk] = useState([]);
+  const [reorderRecs, setReorderRecs] = useState([]);
+  const [deadStock, setDeadStock] = useState([]);
+  const [analytics, setAnalytics] = useState(null);
 
   useEffect(() => {
-    getStockRisk().then(res => setStockRisk(res.data.filter(r => r.risk_level === 'Critical' || r.risk_level === 'High')));
-    getReorderRecs().then(res => setReorderRecs(res.data.filter(r => r.status === 'Reorder Now')));
-    getDeadStock().then(res => setDeadStock(res.data.filter(d => d.status === 'Dead Stock')));
-    getSalesAnalytics().then(res => setAnalytics(res.data));
+    getStockRisk().then((res) => setStockRisk(res.data.filter((r) => r.risk_level === 'Critical' || r.risk_level === 'High')));
+    getReorderRecs().then((res) => setReorderRecs(res.data.filter((r) => r.status === 'Reorder Now')));
+    getDeadStock().then((res) => setDeadStock(res.data.filter((d) => d.status === 'Dead Stock')));
+    getSalesAnalytics().then((res) => setAnalytics(res.data));
   }, []);
 
   return (
@@ -22,11 +22,11 @@ const Dashboard = () => {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">Inventory Intelligence Dashboard</h1>
-          {analytics?.data_available_through && (
-            <p className="text-gray-400 text-sm">
+          {analytics?.data_available_through &&
+          <p className="text-gray-400 text-sm">
               Data available through: <span className="text-primary font-mono">{analytics.data_available_through}</span>
             </p>
-          )}
+          }
         </div>
         <div className="flex gap-4">
           <Link to="/sales-ops" className="flex items-center gap-2 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition">
@@ -93,8 +93,8 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {stockRisk.slice(0, 5).map((risk) => (
-                  <tr key={risk.product_id} className="border-b border-gray-800/50">
+                {stockRisk.slice(0, 5).map((risk) =>
+                <tr key={risk.product_id} className="border-b border-gray-800/50">
                     <td className="py-4 text-white truncate max-w-[200px]" title={risk.product_name}>
                       {risk.product_name}
                     </td>
@@ -105,12 +105,12 @@ const Dashboard = () => {
                     </td>
                     <td className="py-4 text-danger font-medium">{risk.days_remaining.toFixed(1)} days</td>
                   </tr>
-                ))}
-                {stockRisk.length === 0 && (
-                  <tr>
+                )}
+                {stockRisk.length === 0 &&
+                <tr>
                     <td colSpan={3} className="py-4 text-gray-500 text-center">No critical risks currently.</td>
                   </tr>
-                )}
+                }
               </tbody>
             </table>
           </div>
@@ -131,27 +131,27 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {reorderRecs.slice(0, 5).map((rec) => (
-                  <tr key={rec.product_id} className="border-b border-gray-800/50">
+                {reorderRecs.slice(0, 5).map((rec) =>
+                <tr key={rec.product_id} className="border-b border-gray-800/50">
                     <td className="py-4 text-white truncate max-w-[200px]" title={rec.product_name}>
                       {rec.product_name}
                     </td>
                     <td className="py-4 text-white">{rec.current_stock}</td>
                     <td className="py-4 text-warning font-medium">+{rec.recommended_reorder_quantity}</td>
                   </tr>
-                ))}
-                {reorderRecs.length === 0 && (
-                  <tr>
+                )}
+                {reorderRecs.length === 0 &&
+                <tr>
                     <td colSpan={3} className="py-4 text-gray-500 text-center">No actionable reorders right now.</td>
                   </tr>
-                )}
+                }
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Dashboard;

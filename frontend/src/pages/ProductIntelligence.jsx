@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { getProducts, getProductIntelligence } from '../services/api';
-import type { Product, ProductIntelligenceResponse } from '../services/api';
+
 import { Brain, Package, AlertTriangle, TrendingUp, DollarSign } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ProductIntelligence = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<string>('');
-  const [intel, setIntel] = useState<ProductIntelligenceResponse | null>(null);
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [intel, setIntel] = useState(null);
 
   useEffect(() => {
-    getProducts().then(res => {
+    getProducts().then((res) => {
       setProducts(res.data);
       if (res.data.length > 0) {
         setSelectedProduct(res.data[0].product_id);
@@ -20,7 +20,7 @@ const ProductIntelligence = () => {
 
   useEffect(() => {
     if (selectedProduct) {
-      getProductIntelligence(selectedProduct).then(res => setIntel(res.data));
+      getProductIntelligence(selectedProduct).then((res) => setIntel(res.data));
     }
   }, [selectedProduct]);
 
@@ -31,13 +31,13 @@ const ProductIntelligence = () => {
     PredictedDemand: val
   }));
 
-  const getRiskColor = (risk: string) => {
+  const getRiskColor = (risk) => {
     switch (risk) {
-      case 'Critical': return 'text-red-500 bg-red-500/10 border-red-500/20';
-      case 'High': return 'text-orange-500 bg-orange-500/10 border-orange-500/20';
-      case 'Medium': return 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20';
-      case 'Low': return 'text-green-500 bg-green-500/10 border-green-500/20';
-      default: return 'text-gray-400 bg-gray-500/10 border-gray-500/20';
+      case 'Critical':return 'text-red-500 bg-red-500/10 border-red-500/20';
+      case 'High':return 'text-orange-500 bg-orange-500/10 border-orange-500/20';
+      case 'Medium':return 'text-yellow-500 bg-yellow-500/10 border-yellow-500/20';
+      case 'Low':return 'text-green-500 bg-green-500/10 border-green-500/20';
+      default:return 'text-gray-400 bg-gray-500/10 border-gray-500/20';
     }
   };
 
@@ -49,16 +49,16 @@ const ProductIntelligence = () => {
           Product Intelligence
         </h1>
         <div className="w-80">
-          <select 
+          <select
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
-            className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary"
-          >
-            {products.map(p => (
-              <option key={p.product_id} value={p.product_id}>
+            className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
+            
+            {products.map((p) =>
+            <option key={p.product_id} value={p.product_id}>
                 {p.product_id} - {p.product_name}
               </option>
-            ))}
+            )}
           </select>
         </div>
       </div>
@@ -150,8 +150,8 @@ const ProductIntelligence = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ProductIntelligence;

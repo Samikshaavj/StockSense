@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getSalesAnalytics } from '../services/api';
-import type { SalesAnalyticsResponse } from '../services/api';
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, DollarSign, ShoppingCart } from 'lucide-react';
 
 const SalesAnalytics = () => {
-  const [data, setData] = useState<SalesAnalyticsResponse | null>(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    getSalesAnalytics().then(res => setData(res.data));
+    getSalesAnalytics().then((res) => setData(res.data));
   }, []);
 
   if (!data) return <div className="p-8 text-white">Loading...</div>;
@@ -49,7 +49,7 @@ const SalesAnalytics = () => {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.daily_sales} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                <XAxis dataKey="date" stroke="#9ca3af" tick={{fontSize: 12}} />
+                <XAxis dataKey="date" stroke="#9ca3af" tick={{ fontSize: 12 }} />
                 <YAxis stroke="#9ca3af" />
                 <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #374151', color: '#fff' }} />
                 <Legend />
@@ -63,8 +63,8 @@ const SalesAnalytics = () => {
           <h2 className="text-xl font-bold text-white mb-6">Top 5 Products</h2>
           <div className="flex-1 overflow-auto">
             <div className="space-y-4">
-              {data.top_products.map((product, idx) => (
-                <div key={product.product_id} className="bg-gray-800/50 p-4 rounded-lg flex justify-between items-center border border-gray-700/50">
+              {data.top_products.map((product, idx) =>
+              <div key={product.product_id} className="bg-gray-800/50 p-4 rounded-lg flex justify-between items-center border border-gray-700/50">
                   <div>
                     <p className="text-gray-400 text-xs font-semibold mb-1">#{idx + 1} | {product.product_id}</p>
                     <p className="text-white font-medium line-clamp-1">{product.product_name}</p>
@@ -74,13 +74,13 @@ const SalesAnalytics = () => {
                     <p className="text-gray-400 text-sm">{product.units_sold} sold</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default SalesAnalytics;

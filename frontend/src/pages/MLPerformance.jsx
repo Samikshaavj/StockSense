@@ -3,11 +3,11 @@ import { getModelPerformance, retrainModels } from '../services/api';
 import { Target, Activity, Settings, RefreshCw } from 'lucide-react';
 
 const MLPerformance = () => {
-  const [perf, setPerf] = useState<any>(null);
+  const [perf, setPerf] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const fetchPerf = () => {
-    getModelPerformance().then(res => setPerf(res.data));
+    getModelPerformance().then((res) => setPerf(res.data));
   };
 
   useEffect(() => {
@@ -38,11 +38,11 @@ const MLPerformance = () => {
           <Target className="text-primary w-8 h-8" />
           <h1 className="text-3xl font-bold text-white">Model Performance</h1>
         </div>
-        <button 
-          onClick={handleRetrain} 
+        <button
+          onClick={handleRetrain}
           disabled={loading}
-          className="flex items-center gap-2 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition disabled:opacity-50"
-        >
+          className="flex items-center gap-2 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition disabled:opacity-50">
+          
           <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
           {loading ? 'Training...' : 'Retrain Models'}
         </button>
@@ -104,8 +104,8 @@ const MLPerformance = () => {
           </ul>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default MLPerformance;

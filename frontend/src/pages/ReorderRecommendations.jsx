@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { getReorderRecs } from '../services/api';
-import type { ReorderRec } from '../services/api';
+
 import { PackagePlus } from 'lucide-react';
 
 const ReorderRecommendations = () => {
-  const [recs, setRecs] = useState<ReorderRec[]>([]);
+  const [recs, setRecs] = useState([]);
 
   useEffect(() => {
-    getReorderRecs().then(res => setRecs(res.data));
+    getReorderRecs().then((res) => setRecs(res.data));
   }, []);
 
-  const getStatusColor = (status: string) => {
-    switch(status) {
-      case 'Reorder Now': return 'bg-red-500/20 text-red-400 border-red-500/50';
-      case 'Reorder Soon': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
-      case 'Monitor': return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Reorder Now':return 'bg-red-500/20 text-red-400 border-red-500/50';
+      case 'Reorder Soon':return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
+      case 'Monitor':return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
+      default:return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
     }
   };
 
@@ -41,8 +41,8 @@ const ReorderRecommendations = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800">
-              {recs.map((rec) => (
-                <tr key={rec.product_id} className="hover:bg-gray-800/50 transition">
+              {recs.map((rec) =>
+              <tr key={rec.product_id} className="hover:bg-gray-800/50 transition">
                   <td className="px-6 py-4 text-white font-medium">{rec.product_name}</td>
                   <td className="px-6 py-4 text-gray-300">{rec.current_stock}</td>
                   <td className="px-6 py-4 text-gray-400">{rec.safety_stock}</td>
@@ -57,20 +57,20 @@ const ReorderRecommendations = () => {
                     </span>
                   </td>
                 </tr>
-              ))}
-              {recs.length === 0 && (
-                <tr>
+              )}
+              {recs.length === 0 &&
+              <tr>
                   <td colSpan={7} className="px-6 py-8 text-center text-gray-500">
                     No reorder recommendations at this time. Inventory levels are optimal.
                   </td>
                 </tr>
-              )}
+              }
             </tbody>
           </table>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ReorderRecommendations;
