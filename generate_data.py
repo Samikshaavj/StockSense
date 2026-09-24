@@ -163,11 +163,22 @@ for current_date in date_list:
         if month in [10, 11]: seasonality = 1.3 # Diwali/festival season
         if month in [7, 8]: seasonality = 0.8 # Monsoon
         
-        prob = daily_prob[speed] * seasonality
+        is_obsolete = (speed == "dead" and current_date.year >= 2025)
+        
+        if is_obsolete:
+            prob = 0.0
+        else:
+            prob = daily_prob[speed] * seasonality
+            
+        # Spike demand in last 14 days for first 10 products
+        if speed == "fast" and current_date >= end_date - timedelta(days=14) and pid in [pr["product_id"] for pr in products_data[:10]]:
+            prob = 1.0
         
         if random.random() < prob:
             # Sale happens
             qty = random.randint(1, 3) if speed == 'fast' else 1
+            if prob == 1.0:
+                qty = random.randint(10, 20)
             if inventory[pid] >= qty:
                 # Can fulfill
                 daily_sales[pid] = daily_sales.get(pid, 0) + qty
@@ -266,6 +277,9 @@ for current_date in date_list:
             reorder_qty = p["maximum_stock_level"] - inventory[pid]
             # Random lead time between 2 and 10 days
             lead_time = random.randint(2, 10)
+            if speed == "fast" and current_date >= end_date - timedelta(days=20) and pid in [pr["product_id"] for pr in products_data[:10]]:
+                lead_time = 30
+                
             pending_orders.append({
                 'product_id': pid,
                 'qty': reorder_qty,
