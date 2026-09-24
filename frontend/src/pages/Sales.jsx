@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { recordSale, getSalesHistory, getProducts } from '../services/api';
+import { recordSale, getSalesHistory, getProducts, getSalesMonths } from '../services/api';
 
 import { PlusCircle, Search } from 'lucide-react';
 
 export default function Sales() {
   const [products, setProducts] = useState([]);
   const [sales, setSales] = useState([]);
+  const [months, setMonths] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState('');
 
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -17,19 +19,29 @@ export default function Sales() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchData();
+    getProducts().then((res) => setProducts(res.data)).catch((err) => setError(err.response?.data?.detail || 'Failed to fetch products'));
+    getSalesMonths().then((res) => {
+      setMonths(res.data);
+      if (res.data.length > 0) {
+        setSelectedMonth(res.data[0]);
+      } else {
+        fetchSalesData('');
+      }
+    });
   }, []);
 
-  const fetchData = async () => {
+  useEffect(() => {
+    if (selectedMonth !== undefined) {
+      fetchSalesData(selectedMonth);
+    }
+  }, [selectedMonth]);
+
+  const fetchSalesData = async (month) => {
     try {
-      const [prodsRes, salesRes] = await Promise.all([
-      getProducts(),
-      getSalesHistory()]
-      );
-      setProducts(prodsRes.data);
+      const salesRes = await getSalesHistory(month || null);
       setSales(salesRes.data);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to fetch data');
+      setError(err.response?.data?.detail || 'Failed to fetch sales');
     }
   };
 
@@ -44,7 +56,7 @@ export default function Sales() {
         customer_type: customerType,
         payment_method: paymentMethod
       });
-      await fetchData();
+      await fetchSalesData(selectedMonth);
       setQuantity(1);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to record sale');
@@ -141,15 +153,27 @@ export default function Sales() {
       <div className="bg-surface rounded-xl border border-gray-800 flex flex-col">
         <div className="p-6 border-b border-gray-800 flex justify-between items-center">
           <h2 className="text-xl font-semibold">Sales History</h2>
-          <div className="relative">
-            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search ID or Product..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-background border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary" />
-            
+          <div className="flex gap-4 items-center">
+            <select
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+              className="bg-background border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
+              
+              <option value="">All-Time</option>
+              {months.map((m) => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
+            <div className="relative">
+              <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search ID or Product..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2 bg-background border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary" />
+              
+            </div>
           </div>
         </div>
         <div className="overflow-x-auto">

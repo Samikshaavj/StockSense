@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getStockRisk, getReorderRecs, getDeadStock, getSalesAnalytics } from '../services/api';
+import { getStockRisk, getReorderRecs, getDeadStock, getSalesAnalytics, getSalesMonths } from '../services/api';
 
 import { AlertTriangle, TrendingDown, Clock, Package, PlusCircle, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,13 +9,25 @@ const Dashboard = () => {
   const [reorderRecs, setReorderRecs] = useState([]);
   const [deadStock, setDeadStock] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+  const [months, setMonths] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState('');
 
   useEffect(() => {
     getStockRisk().then((res) => setStockRisk(res.data.filter((r) => r.risk_level === 'Critical' || r.risk_level === 'High')));
     getReorderRecs().then((res) => setReorderRecs(res.data.filter((r) => r.status === 'Reorder Now')));
     getDeadStock().then((res) => setDeadStock(res.data.filter((d) => d.status === 'Dead Stock')));
-    getSalesAnalytics().then((res) => setAnalytics(res.data));
+    
+    getSalesMonths().then((res) => {
+      setMonths(res.data);
+      if (res.data.length > 0) {
+        setSelectedMonth(res.data[0]);
+      }
+    });
   }, []);
+
+  useEffect(() => {
+    getSalesAnalytics(selectedMonth || null).then((res) => setAnalytics(res.data));
+  }, [selectedMonth]);
 
   return (
     <div className="p-8">
@@ -28,7 +40,17 @@ const Dashboard = () => {
             </p>
           }
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
+          <select
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            className="bg-surface border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
+            
+            <option value="">All-Time (30 Days)</option>
+            {months.map((m) => (
+              <option key={m} value={m}>{m}</option>
+            ))}
+          </select>
           <Link to="/sales-ops" className="flex items-center gap-2 bg-primary text-black font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition">
             <PlusCircle className="w-5 h-5" /> New Sale
           </Link>

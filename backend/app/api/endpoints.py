@@ -88,23 +88,35 @@ def get_dead_stock(db: Session = Depends(get_db)):
     return sorted(ds_list, key=lambda x: x.days_since_last_sale, reverse=True)
 
 @router.get("/sales/analytics", response_model=SalesAnalyticsResponse)
-def get_sales_analytics(db: Session = Depends(get_db)):
+def get_sales_analytics(db: Session = Depends(get_db), month: str = None):
     from sqlalchemy import func
     from datetime import date, timedelta
     from backend.database.schema import Sale
     
-    # In a real app we'd use current date, but for synthetic data we'll use max date
     max_date = db.query(func.max(Sale.date)).scalar()
     if not max_date:
         return SalesAnalyticsResponse(daily_sales=[], top_products=[], total_revenue_30d=0, total_units_30d=0, data_available_through="")
         
-    start_date = max_date - timedelta(days=30)
+    if month:
+        try:
+            year, m = map(int, month.split('-'))
+            start_date = date(year, m, 1)
+            if m == 12:
+                end_date = date(year+1, 1, 1) - timedelta(days=1)
+            else:
+                end_date = date(year, m+1, 1) - timedelta(days=1)
+        except Exception:
+            start_date = max_date - timedelta(days=30)
+            end_date = max_date
+    else:
+        start_date = max_date - timedelta(days=30)
+        end_date = max_date
     
-    # 30-day totals
+    # period totals
     totals = db.query(
         func.sum(Sale.total_amount).label('rev'),
         func.sum(Sale.quantity_sold).label('units')
-    ).filter(Sale.date >= start_date).first()
+    ).filter(Sale.date >= start_date, Sale.date <= end_date).first()
     
     total_rev = totals.rev or 0
     total_units = totals.units or 0
@@ -114,7 +126,7 @@ def get_sales_analytics(db: Session = Depends(get_db)):
         Sale.date,
         func.sum(Sale.total_amount).label('rev'),
         func.sum(Sale.quantity_sold).label('units')
-    ).filter(Sale.date >= start_date).group_by(Sale.date).order_by(Sale.date).all()
+    ).filter(Sale.date >= start_date, Sale.date <= end_date).group_by(Sale.date).order_by(Sale.date).all()
     
     daily_sales = [DailySalesData(date=str(d.date), total_revenue=d.rev, total_units_sold=d.units) for d in daily]
     
@@ -125,7 +137,7 @@ def get_sales_analytics(db: Session = Depends(get_db)):
         func.sum(Sale.quantity_sold).label('units'),
         func.sum(Sale.total_amount).label('rev')
     ).join(Sale, Product.product_id == Sale.product_id)\
-     .filter(Sale.date >= start_date)\
+     .filter(Sale.date >= start_date, Sale.date <= end_date)\
      .group_by(Product.product_id, Product.product_name)\
      .order_by(func.sum(Sale.total_amount).desc())\
      .limit(5).all()
@@ -137,8 +149,14 @@ def get_sales_analytics(db: Session = Depends(get_db)):
         top_products=top_products,
         total_revenue_30d=total_rev,
         total_units_30d=total_units,
-        data_available_through=str(max_date)
+        data_available_through=str(end_date)
     )
+
+@router.get("/sales/months")
+def get_sales_months(db: Session = Depends(get_db)):
+    from sqlalchemy import func
+    dates = db.query(func.substr(Sale.date, 1, 7).label('month')).distinct().order_by(func.substr(Sale.date, 1, 7).desc()).all()
+    return [d.month for d in dates if d.month]
 
 @router.get("/product-intelligence/{product_id}", response_model=ProductIntelligenceResponse)
 def get_product_intelligence(product_id: str, db: Session = Depends(get_db)):
@@ -269,9 +287,24 @@ def create_sale(sale: SaleCreate, db: Session = Depends(get_db)):
     return {"message": "Sale recorded successfully"}
 
 @router.get("/sales")
-def get_sales(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+def get_sales(db: Session = Depends(get_db), skip: int = 0, limit: int = 100, month: str = None):
     from sqlalchemy import text
-    sales = db.query(Sale).order_by(Sale.date.desc(), text("rowid desc")).offset(skip).limit(limit).all()
+    from datetime import date, timedelta
+    
+    query = db.query(Sale)
+    if month:
+        try:
+            year, m = map(int, month.split('-'))
+            start_date = date(year, m, 1)
+            if m == 12:
+                end_date = date(year+1, 1, 1) - timedelta(days=1)
+            else:
+                end_date = date(year, m+1, 1) - timedelta(days=1)
+            query = query.filter(Sale.date >= start_date, Sale.date <= end_date)
+        except Exception:
+            pass
+            
+    sales = query.order_by(Sale.date.desc(), text("rowid desc")).offset(skip).limit(limit).all()
     return sales
 
 @router.post("/purchases")

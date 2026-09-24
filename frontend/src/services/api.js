@@ -96,7 +96,7 @@ export const getReorderRecs = () => api.get('/reorder-recommendations');
 export const getDeadStock = () => api.get('/dead-stock');
 export const getForecast = (productId, horizon = 7) =>
 api.get(`/forecast/${productId}?horizon=${horizon}`);
-export const getSalesAnalytics = () => api.get('/sales/analytics');
+export const getSalesAnalytics = (month = null) => api.get('/sales/analytics' + (month ? `?month=${month}` : ''));
 export const getProductIntelligence = (productId) => api.get(`/product-intelligence/${productId}`);
 export const getModelPerformance = () => api.get('/model-performance');
 
@@ -138,7 +138,8 @@ export const getModelPerformance = () => api.get('/model-performance');
 
 
 export const recordSale = (sale) => api.post('/sales', sale);
-export const getSalesHistory = () => api.get('/sales');
+export const getSalesHistory = (month = null) => api.get('/sales' + (month ? `?month=${month}` : ''));
+export const getSalesMonths = () => api.get('/sales/months');
 export const receiveStock = (purchase) => api.post('/purchases', purchase);
 export const getPurchaseHistory = () => api.get('/purchases');
 export const adjustStock = (adj) => api.post('/inventory/adjustments', adj);
