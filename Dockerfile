@@ -14,10 +14,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend code, ml scripts, and models
+# Copy backend code, ml scripts, models, and data
 COPY backend/ ./backend/
 COPY ml/ ./ml/
 COPY models/ ./models/
+COPY data/ ./data/
 
 # Copy the pre-existing SQLite database (if needed for the demo)
 # In production on Render, you should use a managed PostgreSQL database, 
