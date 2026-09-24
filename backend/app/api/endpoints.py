@@ -270,7 +270,8 @@ def create_sale(sale: SaleCreate, db: Session = Depends(get_db)):
 
 @router.get("/sales")
 def get_sales(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
-    sales = db.query(Sale).order_by(Sale.date.desc()).offset(skip).limit(limit).all()
+    from sqlalchemy import text
+    sales = db.query(Sale).order_by(Sale.date.desc(), text("rowid desc")).offset(skip).limit(limit).all()
     return sales
 
 @router.post("/purchases")
@@ -293,7 +294,8 @@ def create_purchase(purchase: PurchaseCreate, db: Session = Depends(get_db)):
 
 @router.get("/purchases")
 def get_purchases(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
-    purchases = db.query(Purchase).order_by(Purchase.purchase_date.desc()).offset(skip).limit(limit).all()
+    from sqlalchemy import text
+    purchases = db.query(Purchase).order_by(Purchase.purchase_date.desc(), text("rowid desc")).offset(skip).limit(limit).all()
     return purchases
 
 @router.post("/inventory/adjustments")
