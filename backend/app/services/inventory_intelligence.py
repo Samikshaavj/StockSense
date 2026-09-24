@@ -11,9 +11,7 @@ def get_current_stock(db: Session, product_id: str) -> int:
     return inv.closing_stock if inv else 0
 
 def get_current_business_date(db: Session):
-    from sqlalchemy import func
-    max_date = db.query(func.max(Sale.date)).scalar()
-    return max_date if max_date else datetime.now().date()
+    return datetime.now().date()
 
 def get_stock_status(current_stock: int, safety_stock: int) -> str:
     if current_stock <= 0:

@@ -155,8 +155,17 @@ def get_sales_analytics(db: Session = Depends(get_db), month: str = None):
 @router.get("/sales/months")
 def get_sales_months(db: Session = Depends(get_db)):
     from sqlalchemy import func
+    from datetime import datetime
+    
     dates = db.query(func.substr(Sale.date, 1, 7).label('month')).distinct().order_by(func.substr(Sale.date, 1, 7).desc()).all()
-    return [d.month for d in dates if d.month]
+    months = [d.month for d in dates if d.month]
+    
+    current_month = datetime.now().strftime('%Y-%m')
+    if current_month not in months:
+        months.append(current_month)
+        months.sort(reverse=True)
+        
+    return months
 
 @router.get("/product-intelligence/{product_id}", response_model=ProductIntelligenceResponse)
 def get_product_intelligence(product_id: str, db: Session = Depends(get_db)):
