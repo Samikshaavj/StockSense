@@ -134,7 +134,7 @@ products_df_out.to_csv("products.csv", index=False)
 
 # --- 3. SALES & INVENTORY ---
 start_date = datetime(2022, 1, 1)
-end_date = datetime(2023, 12, 31)
+end_date = datetime.now()
 num_days = (end_date - start_date).days + 1
 date_list = [start_date + timedelta(days=x) for x in range(num_days)]
 
@@ -208,33 +208,73 @@ for current_date in date_list:
                     })
                     transaction_id_counter += 1
 
+    # We need a pending orders dict to track lead times
+    if 'pending_orders' not in locals():
+        pending_orders = []
+
+    # Process arriving orders first
+    arrived_today = []
+    still_pending = []
+    for order in pending_orders:
+        if current_date >= order['arrival_date']:
+            inventory[order['product_id']] += order['qty']
+            purchases.append({
+                "purchase_id": f"PR{purchase_id_counter:05d}",
+                "purchase_date": current_date.strftime("%Y-%m-%d"),
+                "product_id": order['product_id'],
+                "quantity_purchased": order['qty'],
+                "purchase_price_inr": order['purchase_price']
+            })
+            purchase_id_counter += 1
+            arrived_today.append(order)
+        else:
+            still_pending.append(order)
+    pending_orders = still_pending
+
     # End of day inventory update and ordering
     for p in products_data:
         pid = p["product_id"]
         opening = inventory[pid]
         sold = daily_sales.get(pid, 0)
+        
+        # We process arrived today into opening stock for simplicity of tracking? 
+        # Actually opening stock should be start of day. Arrived today can be added to opening.
+        # But wait, arrived today is already added to inventory[pid].
+        # Let's correctly compute purchased for the inventory_history log.
+        purchased = sum(o['qty'] for o in arrived_today if o['product_id'] == pid)
+        
+        # In reality, opening should be before today's sales and purchases.
+        # opening = inventory[pid] - purchased + sold (since inventory[pid] has purchased added and sold not yet subtracted).
+        
+        # Let's do it cleanly:
+        # At start of loop, inventory[pid] has yesterday's closing stock.
+        opening = inventory[pid]
+        
+        # Add purchases that arrived today
+        inventory[pid] += purchased
+        
+        # Subtract sales
         inventory[pid] -= sold
         
         # Check if we need to purchase
-        purchased = 0
-        if inventory[pid] <= p["minimum_stock_level"]:
-            # Reorder up to max
+        # If a product is 'dead', maybe it's obsolete. Let's make 5% of products obsolete halfway through.
+        is_obsolete = (p["speed"] == "dead" and current_date.year >= 2025)
+        
+        # Only reorder if below min stock AND we don't already have a pending order AND it's not obsolete
+        is_pending = any(o['product_id'] == pid for o in pending_orders)
+        if inventory[pid] <= p["minimum_stock_level"] and not is_pending and not is_obsolete:
             reorder_qty = p["maximum_stock_level"] - inventory[pid]
-            # Delay in purchase (assuming arrived today)
-            purchased = reorder_qty
-            inventory[pid] += purchased
-            
-            purchases.append({
-                "purchase_id": f"PR{purchase_id_counter:05d}",
-                "purchase_date": current_date.strftime("%Y-%m-%d"),
-                "product_id": pid,
-                "quantity_purchased": purchased,
-                "purchase_price_inr": p["purchase_price_inr"]
+            # Random lead time between 2 and 10 days
+            lead_time = random.randint(2, 10)
+            pending_orders.append({
+                'product_id': pid,
+                'qty': reorder_qty,
+                'purchase_price': p["purchase_price_inr"],
+                'arrival_date': current_date + timedelta(days=lead_time)
             })
-            purchase_id_counter += 1
             
         closing = inventory[pid]
-        stockout = 1 if closing == 0 and sold < (daily_sales.get(pid, 0) if pid in daily_sales else 0) else (1 if opening - sold == 0 else 0)
+        stockout = 1 if closing <= 0 and sold < (daily_sales.get(pid, 0) if pid in daily_sales else 0) else (1 if closing <= 0 else 0)
         
         inventory_history.append({
             "date": current_date.strftime("%Y-%m-%d"),
