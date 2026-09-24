@@ -60,83 +60,56 @@ def train_and_select():
     
     print(f"Train size: {len(X_train)}, Val size: {len(X_val)}, Test size: {len(X_test)}")
     
-    # 1. Baseline: Naive approach (predicting the same as yesterday's sales: lag_1)
-    # Or moving average (rolling_7_mean)
-    baseline_preds = X_val['rolling_7_mean']
+    # 1. Evaluate XGBoost
+    print("Evaluating XGBoost Regressor...")
+    model = xgb.XGBRegressor(n_estimators=100, random_state=42, objective='reg:squarederror')
+    model.fit(X_train, y_train)
+    preds = model.predict(X_val)
+    preds = np.maximum(0, preds)
     
-    models = {
-        "Baseline (Moving Avg)": None, # Handled manually
-        "Linear Regression": LinearRegression(),
-        "Random Forest": RandomForestRegressor(n_estimators=100, random_state=42),
-        "Gradient Boosting": GradientBoostingRegressor(n_estimators=100, random_state=42),
-        "XGBoost": xgb.XGBRegressor(n_estimators=100, random_state=42, objective='reg:squarederror')
-    }
+    mae = mean_absolute_error(y_val, preds)
+    rmse = np.sqrt(mean_squared_error(y_val, preds))
+    mape = mean_absolute_percentage_error(y_val, preds)
     
-    results = {}
-    best_model_name = None
-    best_val_rmse = float('inf')
-    best_model = None
-    
-    for name, model in models.items():
-        print(f"Evaluating {name}...")
-        if name == "Baseline (Moving Avg)":
-            preds = baseline_preds
-        else:
-            model.fit(X_train, y_train)
-            preds = model.predict(X_val)
-            
-        # Ensure no negative predictions
-        preds = np.maximum(0, preds)
-        
-        mae = mean_absolute_error(y_val, preds)
-        rmse = np.sqrt(mean_squared_error(y_val, preds))
-        mape = mean_absolute_percentage_error(y_val, preds)
-        
-        results[name] = {
+    results = {
+        "XGBoost": {
             "MAE": float(mae),
             "RMSE": float(rmse),
             "MAPE": float(mape) if not np.isnan(mape) else None
         }
-        
-        if rmse < best_val_rmse:
-            best_val_rmse = rmse
-            best_model_name = name
-            if name != "Baseline (Moving Avg)":
-                best_model = model
-                
+    }
+    
+    mape_str = f"{mape:.2f}%" if not np.isnan(mape) else "N/A"
     print("\n--- Model Evaluation Results (Validation Set) ---")
-    for name, metrics in results.items():
-        mape_str = f"{metrics['MAPE']:.2f}%" if metrics['MAPE'] else "N/A"
-        print(f"{name}: MAE={metrics['MAE']:.3f}, RMSE={metrics['RMSE']:.3f}, MAPE={mape_str}")
-        
-    print(f"\nBest Model Selected: {best_model_name} (RMSE: {best_val_rmse:.3f})")
+    print(f"XGBoost: MAE={mae:.3f}, RMSE={rmse:.3f}, MAPE={mape_str}")
+    
+    best_model_name = "XGBoost"
+    best_val_rmse = rmse
+    best_model = model
     
     # Re-train best model on train+val before final test evaluation
-    if best_model_name != "Baseline (Moving Avg)":
-        print(f"Re-training {best_model_name} on Train+Val data...")
-        X_train_val = pd.concat([X_train, X_val])
-        y_train_val = pd.concat([y_train, y_val])
-        best_model.fit(X_train_val, y_train_val)
-        
-        # Test Evaluation
-        test_preds = np.maximum(0, best_model.predict(X_test))
-        test_mae = mean_absolute_error(y_test, test_preds)
-        test_rmse = np.sqrt(mean_squared_error(y_test, test_preds))
-        test_mape = mean_absolute_percentage_error(y_test, test_preds)
-        
-        results[best_model_name]["Test_MAE"] = float(test_mae)
-        results[best_model_name]["Test_RMSE"] = float(test_rmse)
-        results[best_model_name]["Test_MAPE"] = float(test_mape) if not np.isnan(test_mape) else None
-        print(f"Test Set Performance -> MAE: {test_mae:.3f}, RMSE: {test_rmse:.3f}")
-        
-        # Persist model
-        os.makedirs("models", exist_ok=True)
-        model_path = "models/best_model.joblib"
-        joblib.dump(best_model, model_path)
-        print(f"Saved best model to {model_path}")
-    else:
-        print("Baseline selected. No model to persist.")
-        
+    print(f"\nRe-training {best_model_name} on Train+Val data...")
+    X_train_val = pd.concat([X_train, X_val])
+    y_train_val = pd.concat([y_train, y_val])
+    best_model.fit(X_train_val, y_train_val)
+    
+    # Test Evaluation
+    test_preds = np.maximum(0, best_model.predict(X_test))
+    test_mae = mean_absolute_error(y_test, test_preds)
+    test_rmse = np.sqrt(mean_squared_error(y_test, test_preds))
+    test_mape = mean_absolute_percentage_error(y_test, test_preds)
+    
+    results[best_model_name]["Test_MAE"] = float(test_mae)
+    results[best_model_name]["Test_RMSE"] = float(test_rmse)
+    results[best_model_name]["Test_MAPE"] = float(test_mape) if not np.isnan(test_mape) else None
+    print(f"Test Set Performance -> MAE: {test_mae:.3f}, RMSE: {test_rmse:.3f}")
+    
+    # Persist model
+    os.makedirs(os.path.join(os.path.dirname(__file__), '../models'), exist_ok=True)
+    model_path = os.path.join(os.path.dirname(__file__), '../models/best_model.joblib')
+    joblib.dump(best_model, model_path)
+    print(f"Saved best model to {model_path}")
+    
     # Save metadata
     metadata = {
         "selected_model": best_model_name,

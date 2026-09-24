@@ -1,8 +1,8 @@
 {
-    "selected_model": "Baseline (Moving Avg)",
-    "training_date": "2026-09-24T20:27:02.302668",
-    "dataset_period": "1970-01-31 to 2026-09-23",
-    "num_samples": 3910410,
+    "selected_model": "XGBoost",
+    "training_date": "2026-09-24T20:57:18.070740",
+    "dataset_period": "2022-01-31 to 2026-09-24",
+    "num_samples": 320922,
     "features": [
         "lag_1",
         "lag_7",
@@ -17,30 +17,13 @@
         "is_weekend"
     ],
     "results": {
-        "Baseline (Moving Avg)": {
-            "MAE": 0.0,
-            "RMSE": 0.0,
-            "MAPE": null
-        },
-        "Linear Regression": {
-            "MAE": 0.0,
-            "RMSE": 0.0,
-            "MAPE": null
-        },
-        "Random Forest": {
-            "MAE": 0.0,
-            "RMSE": 0.0,
-            "MAPE": null
-        },
-        "Gradient Boosting": {
-            "MAE": 0.0,
-            "RMSE": 0.0,
-            "MAPE": null
-        },
         "XGBoost": {
-            "MAE": 0.0,
-            "RMSE": 0.0,
-            "MAPE": null
+            "MAE": 0.43071969358652423,
+            "RMSE": 0.6425551926003847,
+            "MAPE": 61.16227370199889,
+            "Test_MAE": 0.4621110654035695,
+            "Test_RMSE": 1.1403286478629655,
+            "Test_MAPE": 66.9848880706472
         }
     }
 }
