@@ -1,8 +1,8 @@
 {
-    "selected_model": "Gradient Boosting",
-    "training_date": "2026-09-20T19:12:16.254957",
-    "dataset_period": "2022-01-31 to 2023-12-31",
-    "num_samples": 132300,
+    "selected_model": "Baseline (Moving Avg)",
+    "training_date": "2026-09-24T20:27:02.302668",
+    "dataset_period": "1970-01-31 to 2026-09-23",
+    "num_samples": 3910410,
     "features": [
         "lag_1",
         "lag_7",
@@ -18,32 +18,29 @@
     ],
     "results": {
         "Baseline (Moving Avg)": {
-            "MAE": 0.42399520194551243,
-            "RMSE": 0.6663417681286303,
-            "MAPE": 63.06071539934962
+            "MAE": 0.0,
+            "RMSE": 0.0,
+            "MAPE": null
         },
         "Linear Regression": {
-            "MAE": 0.42728620964800457,
-            "RMSE": 0.6353462961963853,
-            "MAPE": 60.130990319222796
+            "MAE": 0.0,
+            "RMSE": 0.0,
+            "MAPE": null
         },
         "Random Forest": {
-            "MAE": 0.4367998499004189,
-            "RMSE": 0.6583061373679774,
-            "MAPE": 60.434788873654085
+            "MAE": 0.0,
+            "RMSE": 0.0,
+            "MAPE": null
         },
         "Gradient Boosting": {
-            "MAE": 0.4212397255873321,
-            "RMSE": 0.6272313600317163,
-            "MAPE": 60.9992251311835,
-            "Test_MAE": 0.45783687570665194,
-            "Test_RMSE": 0.6505665067631404,
-            "Test_MAPE": 58.271856586609935
+            "MAE": 0.0,
+            "RMSE": 0.0,
+            "MAPE": null
         },
         "XGBoost": {
-            "MAE": 0.4282297816224002,
-            "RMSE": 0.6439637098499069,
-            "MAPE": 62.24040255583021
+            "MAE": 0.0,
+            "RMSE": 0.0,
+            "MAPE": null
         }
     }
 }
