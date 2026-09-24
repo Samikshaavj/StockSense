@@ -31,7 +31,10 @@ def calculate_stock_out_risk(db: Session, product_id: str) -> StockOutRisk:
     forecast = predict_demand(product_id, horizon_days=7)
     predicted_daily = sum(forecast) / len(forecast) if forecast else 0
     
-    if predicted_daily <= 0.05:
+    if current_stock <= 0:
+        days_remaining = 0.0
+        risk_level = "Critical"
+    elif predicted_daily <= 0.05:
         days_remaining = 999.0 # Effectively infinite
         risk_level = "Low"
     else:
