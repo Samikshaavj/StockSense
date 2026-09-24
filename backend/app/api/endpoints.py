@@ -158,10 +158,10 @@ def get_sales_months(db: Session = Depends(get_db)):
     from datetime import datetime
     
     dates = db.query(func.substr(Sale.date, 1, 7).label('month')).distinct().order_by(func.substr(Sale.date, 1, 7).desc()).all()
-    months = [d.month for d in dates if d.month]
+    months = [d.month for d in dates if d.month and d.month.startswith('2026')]
     
     current_month = datetime.now().strftime('%Y-%m')
-    if current_month not in months:
+    if current_month.startswith('2026') and current_month not in months:
         months.append(current_month)
         months.sort(reverse=True)
         
