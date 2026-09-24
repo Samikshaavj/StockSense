@@ -18,6 +18,14 @@ def load_model():
         
     return model, metadata
 
+import functools
+
+@functools.lru_cache(maxsize=1)
+def load_data():
+    sales = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/sales_transactions.csv'))
+    prods = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/products.csv'))
+    return sales, prods
+
 def predict_demand(product_id: str, horizon_days: int = 7):
     """
     Simulates a multi-step forecast using the persisted model.
@@ -31,8 +39,7 @@ def predict_demand(product_id: str, horizon_days: int = 7):
     # Load recent data to build features
     # (In a production system, this would hit the DB, but we use the CSVs for simplicity in the ML script context.
     # The actual FastAPI backend will pass DB records).
-    sales = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/sales_transactions.csv'))
-    prods = pd.read_csv(os.path.join(os.path.dirname(__file__), '../data/products.csv'))
+    sales, prods = load_data()
     
     # We only need the product in question
     sales = sales[sales['product_id'] == product_id]
