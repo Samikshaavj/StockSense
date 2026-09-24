@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getStockRisk, getReorderRecs, getDeadStock, getSalesAnalytics } from '../services/api';
+import { getStockRisk, getReorderRecs, getDeadStock } from '../services/api';
 
 import { AlertTriangle, TrendingDown, Clock, Package, PlusCircle, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,13 +8,10 @@ const Dashboard = () => {
   const [stockRisk, setStockRisk] = useState([]);
   const [reorderRecs, setReorderRecs] = useState([]);
   const [deadStock, setDeadStock] = useState([]);
-  const [analytics, setAnalytics] = useState(null);
-
   useEffect(() => {
     getStockRisk().then((res) => setStockRisk(res.data.filter((r) => r.risk_level === 'Critical' || r.risk_level === 'High')));
     getReorderRecs().then((res) => setReorderRecs(res.data.filter((r) => r.status === 'Reorder Now')));
     getDeadStock().then((res) => setDeadStock(res.data.filter((d) => d.status === 'Dead Stock')));
-    getSalesAnalytics().then((res) => setAnalytics(res.data));
   }, []);
 
   return (
@@ -33,7 +30,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-surface rounded-xl p-6 border border-gray-800 flex items-center shadow-lg">
           <div className="bg-red-500/10 p-4 rounded-lg mr-4">
             <AlertTriangle className="text-danger w-8 h-8" />
@@ -64,12 +61,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-surface rounded-xl p-6 border border-gray-800 flex flex-col justify-center shadow-lg">
-          <p className="text-gray-400 text-sm mb-1">30-Day Revenue</p>
-          <p className="text-3xl font-bold text-primary">
-            ₹{analytics?.total_revenue_30d?.toLocaleString() || 0}
-          </p>
-        </div>
+
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
