@@ -4,7 +4,7 @@ import { receiveStock, getPurchaseHistory, getProducts } from '../services/api';
 import { ShoppingBag, Search } from 'lucide-react';
 
 export default function Purchases() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(() => JSON.parse(localStorage.getItem('inventoryProducts')) || []);
 
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(10);
@@ -16,12 +16,18 @@ export default function Purchases() {
     fetchData();
   }, []);
 
+  const [isProductsLoading, setIsProductsLoading] = useState(true);
+
   const fetchData = async () => {
+    setIsProductsLoading(true);
     try {
       const prodsRes = await getProducts();
       setProducts(prodsRes.data);
+      localStorage.setItem('inventoryProducts', JSON.stringify(prodsRes.data));
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to fetch data');
+    } finally {
+      setIsProductsLoading(false);
     }
   };
 
@@ -79,7 +85,7 @@ export default function Purchases() {
               required
               className="w-full bg-background border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
               
-              <option value="">Select a product...</option>
+              <option value="">{isProductsLoading ? 'Loading products...' : 'Select a product...'}</option>
               {products.map((p) =>
               <option key={p.product_id} value={p.product_id}>
                   {p.product_name}

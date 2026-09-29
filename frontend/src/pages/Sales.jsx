@@ -4,7 +4,7 @@ import { recordSale, getSalesHistory, getProducts, getSalesMonths } from '../ser
 import { PlusCircle, Search } from 'lucide-react';
 
 export default function Sales() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(() => JSON.parse(localStorage.getItem('inventoryProducts')) || []);
 
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -13,8 +13,14 @@ export default function Sales() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const [isProductsLoading, setIsProductsLoading] = useState(true);
+
   useEffect(() => {
-    getProducts().then((res) => setProducts(res.data)).catch((err) => setError(err.response?.data?.detail || 'Failed to fetch products'));
+    getProducts().then((res) => {
+      setProducts(res.data);
+      localStorage.setItem('inventoryProducts', JSON.stringify(res.data));
+    }).catch((err) => setError(err.response?.data?.detail || 'Failed to fetch products'))
+    .finally(() => setIsProductsLoading(false));
   }, []);
 
   const handleSale = async (e) => {
@@ -60,7 +66,7 @@ export default function Sales() {
               required
               className="w-full bg-background border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
               
-              <option value="">Select a product...</option>
+              <option value="">{isProductsLoading ? 'Loading products...' : 'Select a product...'}</option>
               {products.map((p) =>
               <option key={p.product_id} value={p.product_id}>
                   {p.product_name} (Stock: {p.current_stock})

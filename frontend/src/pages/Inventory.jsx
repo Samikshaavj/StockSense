@@ -4,8 +4,9 @@ import { getProducts, createProduct, adjustStock } from '../services/api';
 import { Search, Plus, Edit3 } from 'lucide-react';
 
 const Inventory = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(() => JSON.parse(localStorage.getItem('inventoryProducts')) || []);
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isProdModalOpen, setProdModalOpen] = useState(false);
   const [isAdjModalOpen, setAdjModalOpen] = useState(false);
@@ -22,7 +23,11 @@ const Inventory = () => {
   const [adjReason, setAdjReason] = useState('Physical count reconciliation');
 
   const fetchInventory = () => {
-    getProducts().then((res) => setProducts(res.data));
+    setIsLoading(true);
+    getProducts().then((res) => {
+      setProducts(res.data);
+      localStorage.setItem('inventoryProducts', JSON.stringify(res.data));
+    }).finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -128,6 +133,20 @@ const Inventory = () => {
                   </td>
                 </tr>);
               })}
+              {filteredProducts.length === 0 && !isLoading && (
+                <tr>
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                    No products found.
+                  </td>
+                </tr>
+              )}
+              {filteredProducts.length === 0 && isLoading && (
+                <tr>
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                    Loading inventory data...
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
