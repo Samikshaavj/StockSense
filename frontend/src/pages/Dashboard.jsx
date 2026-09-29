@@ -163,6 +163,47 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Dead Stock Items */}
+      <div className="mt-8 bg-surface rounded-xl border border-gray-800 p-6 shadow-lg">
+        <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-400">
+          <Clock className="w-5 h-5" /> Dead Stock Items
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="text-gray-400 border-b border-gray-800">
+                <th className="pb-3 font-medium">Product</th>
+                <th className="pb-3 font-medium">Current Stock</th>
+                <th className="pb-3 font-medium">Days Since Sale</th>
+                <th className="pb-3 font-medium">Inventory Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deadStock.slice(0, 10).map((item) =>
+              <tr key={item.product_id} className="border-b border-gray-800/50">
+                  <td className="py-4 text-white truncate max-w-[200px]" title={item.product_name}>
+                    {item.product_name}
+                  </td>
+                  <td className="py-4 text-white">{item.current_stock}</td>
+                  <td className="py-4 text-gray-400">{item.days_since_last_sale > 900 ? 'No recent sales' : `${item.days_since_last_sale} days`}</td>
+                  <td className="py-4 text-gray-400 font-medium">₹{item.inventory_value.toLocaleString()}</td>
+                </tr>
+              )}
+              {deadStock.length === 0 && !isLoading &&
+              <tr>
+                  <td colSpan={4} className="py-4 text-gray-500 text-center">No dead stock found. Great!</td>
+                </tr>
+              }
+              {deadStock.length === 0 && isLoading &&
+              <tr>
+                  <td colSpan={4} className="py-4 text-gray-500 text-center">Loading dead stock data...</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>);
 
 };
