@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Inventory from './pages/Inventory';
-import SalesAnalytics from './pages/SalesAnalytics';
-import ProductIntelligence from './pages/ProductIntelligence';
 import Sales from './pages/Sales';
 import Purchases from './pages/Purchases';
 import { Package, TrendingUp, Box, Activity, PackagePlus, DollarSign, Brain, Target, ShoppingCart, ShoppingBag } from 'lucide-react';
@@ -32,14 +30,6 @@ function App() {
             <Link to="/inventory" className="flex items-center gap-3 px-6 py-3 hover:bg-gray-800 text-gray-300 hover:text-white transition">
               <Package className="w-5 h-5" /> Inventory Master
             </Link>
-
-            <div className="px-6 py-2 mt-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Analytics & Intelligence</div>
-            <Link to="/sales-analytics" className="flex items-center gap-3 px-6 py-3 hover:bg-gray-800 text-gray-300 hover:text-white transition">
-              <DollarSign className="w-5 h-5" /> Sales Analytics
-            </Link>
-            <Link to="/product-intelligence" className="flex items-center gap-3 px-6 py-3 hover:bg-gray-800 text-gray-300 hover:text-white transition">
-              <Brain className="w-5 h-5" /> Product Intelligence
-            </Link>
           </nav>
         </div>
 
@@ -49,9 +39,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/sales-ops" element={<Sales />} />
             <Route path="/purchases" element={<Purchases />} />
-            <Route path="/sales-analytics" element={<SalesAnalytics />} />
             <Route path="/inventory" element={<Inventory />} />
-            <Route path="/product-intelligence" element={<ProductIntelligence />} />
           </Routes>
         </div>
       </div>
