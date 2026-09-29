@@ -26,8 +26,23 @@ def get_db():
 @router.get("/products", response_model=List[ProductBase])
 def get_products(db: Session = Depends(get_db)):
     products = db.query(Product).all()
-    # Adding current stock manually for simplicity in this endpoint
-    from backend.app.services.inventory_intelligence import get_current_stock
+    
+    # Optimized fetch for current stock to prevent N+1 query timeouts
+    from sqlalchemy import func
+    from backend.database.schema import Inventory
+    
+    subquery = db.query(
+        Inventory.product_id,
+        func.max(Inventory.date).label('max_date')
+    ).group_by(Inventory.product_id).subquery()
+    
+    latest_inv = db.query(Inventory).join(
+        subquery,
+        (Inventory.product_id == subquery.c.product_id) & (Inventory.date == subquery.c.max_date)
+    ).all()
+    
+    stock_map = {inv.product_id: inv.closing_stock for inv in latest_inv}
+    
     result = []
     for p in products:
         result.append(ProductBase(
@@ -36,7 +51,7 @@ def get_products(db: Session = Depends(get_db)):
             category=p.category,
             brand=p.brand,
             selling_price_inr=p.selling_price_inr,
-            current_stock=get_current_stock(db, p.product_id)
+            current_stock=stock_map.get(p.product_id, 0)
         ))
     return result
 
