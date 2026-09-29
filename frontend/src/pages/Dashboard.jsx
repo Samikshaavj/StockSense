@@ -175,8 +175,6 @@ const Dashboard = () => {
               <tr className="text-gray-400 border-b border-gray-800">
                 <th className="pb-3 font-medium">Product</th>
                 <th className="pb-3 font-medium">Current Stock</th>
-                <th className="pb-3 font-medium">Days Since Sale</th>
-                <th className="pb-3 font-medium">Inventory Value</th>
               </tr>
             </thead>
             <tbody>
@@ -186,18 +184,16 @@ const Dashboard = () => {
                     {item.product_name}
                   </td>
                   <td className="py-4 text-white">{item.current_stock}</td>
-                  <td className="py-4 text-gray-400">{item.days_since_last_sale > 900 ? 'No recent sales' : `${item.days_since_last_sale} days`}</td>
-                  <td className="py-4 text-gray-400 font-medium">₹{item.inventory_value.toLocaleString()}</td>
                 </tr>
               )}
               {deadStock.length === 0 && !isLoading &&
               <tr>
-                  <td colSpan={4} className="py-4 text-gray-500 text-center">No dead stock found. Great!</td>
+                  <td colSpan={2} className="py-4 text-gray-500 text-center">No dead stock found. Great!</td>
                 </tr>
               }
               {deadStock.length === 0 && isLoading &&
               <tr>
-                  <td colSpan={4} className="py-4 text-gray-500 text-center">Loading dead stock data...</td>
+                  <td colSpan={2} className="py-4 text-gray-500 text-center">Loading dead stock data...</td>
                 </tr>
               }
             </tbody>
