@@ -5,7 +5,6 @@ import { ShoppingBag, Search } from 'lucide-react';
 
 export default function Purchases() {
   const [products, setProducts] = useState([]);
-  const [purchases, setPurchases] = useState([]);
 
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(10);
@@ -13,20 +12,14 @@ export default function Purchases() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [searchTerm, setSearchTerm] = useState('');
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const [prodsRes, purchRes] = await Promise.all([
-      getProducts(),
-      getPurchaseHistory()]
-      );
+      const prodsRes = await getProducts();
       setProducts(prodsRes.data);
-      setPurchases(purchRes.data);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to fetch data');
     }
@@ -61,11 +54,6 @@ export default function Purchases() {
       setLoading(false);
     }
   };
-
-  const filteredPurchases = purchases.filter((p) =>
-  p.product_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  p.purchase_id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div className="p-8">
@@ -132,49 +120,6 @@ export default function Purchases() {
             </button>
           </div>
         </form>
-      </div>
-
-      {/* Purchase History */}
-      <div className="bg-surface rounded-xl border border-gray-800 flex flex-col">
-        <div className="p-6 border-b border-gray-800 flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Purchase History</h2>
-          <div className="relative">
-            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search ID or Product..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-background border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary" />
-            
-          </div>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="bg-gray-800/50 text-gray-400 text-sm">
-              <tr>
-                <th className="px-6 py-3 font-medium">Purchase ID</th>
-                <th className="px-6 py-3 font-medium">Date</th>
-                <th className="px-6 py-3 font-medium">Product ID</th>
-                <th className="px-6 py-3 font-medium">Quantity</th>
-                <th className="px-6 py-3 font-medium">Unit Cost</th>
-                <th className="px-6 py-3 font-medium">Total Cost</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-800">
-              {filteredPurchases.slice(0, 50).map((purch) =>
-              <tr key={purch.purchase_id} className="hover:bg-gray-800/30">
-                  <td className="px-6 py-4 text-sm font-mono text-gray-400">{purch.purchase_id.slice(0, 8)}...</td>
-                  <td className="px-6 py-4">{purch.purchase_date}</td>
-                  <td className="px-6 py-4 font-mono text-primary">{purch.product_id}</td>
-                  <td className="px-6 py-4 text-green-400">+{purch.quantity_purchased}</td>
-                  <td className="px-6 py-4">₹{purch.purchase_price_inr?.toLocaleString()}</td>
-                  <td className="px-6 py-4">₹{(purch.purchase_price_inr * purch.quantity_purchased)?.toLocaleString()}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>);
 

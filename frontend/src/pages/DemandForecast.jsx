@@ -4,7 +4,7 @@ import { getProducts, getForecast } from '../services/api';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Package } from 'lucide-react';
 
-const DemandForecast = () => {
+const DemandForecast = ({ embedded = false }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   const [forecast, setForecast] = useState(null);
@@ -30,7 +30,7 @@ const DemandForecast = () => {
   })) || [];
 
   return (
-    <div className="p-8 h-full flex flex-col">
+    <div className={`${embedded ? 'h-full flex flex-col' : 'p-8 h-full flex flex-col'}`}>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
           <TrendingUp className="text-primary w-8 h-8" />

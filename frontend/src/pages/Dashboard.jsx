@@ -3,6 +3,7 @@ import { getStockRisk, getReorderRecs, getDeadStock } from '../services/api';
 
 import { AlertTriangle, TrendingDown, Clock, Package, PlusCircle, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DemandForecast from './DemandForecast';
 
 const Dashboard = () => {
   const [stockRisk, setStockRisk] = useState([]);
@@ -136,6 +137,10 @@ const Dashboard = () => {
             </table>
           </div>
         </div>
+      </div>
+
+      <div className="mt-8 border-t border-gray-800 pt-8">
+        <DemandForecast embedded={true} />
       </div>
     </div>);
 

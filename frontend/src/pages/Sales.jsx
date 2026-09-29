@@ -5,9 +5,6 @@ import { PlusCircle, Search } from 'lucide-react';
 
 export default function Sales() {
   const [products, setProducts] = useState([]);
-  const [sales, setSales] = useState([]);
-  const [months, setMonths] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState('');
 
   const [productId, setProductId] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -16,34 +13,9 @@ export default function Sales() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [searchTerm, setSearchTerm] = useState('');
-
   useEffect(() => {
     getProducts().then((res) => setProducts(res.data)).catch((err) => setError(err.response?.data?.detail || 'Failed to fetch products'));
-    getSalesMonths().then((res) => {
-      setMonths(res.data);
-      if (res.data.length > 0) {
-        setSelectedMonth(res.data[0]);
-      } else {
-        fetchSalesData('');
-      }
-    });
   }, []);
-
-  useEffect(() => {
-    if (selectedMonth !== undefined) {
-      fetchSalesData(selectedMonth);
-    }
-  }, [selectedMonth]);
-
-  const fetchSalesData = async (month) => {
-    try {
-      const salesRes = await getSalesHistory(month || null);
-      setSales(salesRes.data);
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to fetch sales');
-    }
-  };
 
   const handleSale = async (e) => {
     e.preventDefault();
@@ -56,7 +28,6 @@ export default function Sales() {
         customer_type: customerType,
         payment_method: paymentMethod
       });
-      await fetchSalesData(selectedMonth);
       setQuantity(1);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to record sale');
@@ -64,11 +35,6 @@ export default function Sales() {
       setLoading(false);
     }
   };
-
-  const filteredSales = sales.filter((s) =>
-  s.product_id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  s.transaction_id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div className="p-8">
@@ -147,65 +113,6 @@ export default function Sales() {
             </button>
           </div>
         </form>
-      </div>
-
-      {/* Sales History */}
-      <div className="bg-surface rounded-xl border border-gray-800 flex flex-col">
-        <div className="p-6 border-b border-gray-800 flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Sales History</h2>
-          <div className="flex gap-4 items-center">
-            <select
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-              className="bg-background border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary">
-              
-              <option value="">All-Time</option>
-              {months.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-            <div className="relative">
-              <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search ID or Product..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 bg-background border border-gray-700 rounded-lg text-white focus:outline-none focus:border-primary" />
-              
-            </div>
-          </div>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="bg-gray-800/50 text-gray-400 text-sm">
-              <tr>
-                <th className="px-6 py-3 font-medium">Transaction ID</th>
-                <th className="px-6 py-3 font-medium">Date</th>
-                <th className="px-6 py-3 font-medium">Product ID</th>
-                <th className="px-6 py-3 font-medium">Quantity</th>
-                <th className="px-6 py-3 font-medium">Total Amount</th>
-                <th className="px-6 py-3 font-medium">Customer</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-800">
-              {filteredSales.slice(0, 50).map((sale) =>
-              <tr key={sale.transaction_id} className="hover:bg-gray-800/30">
-                  <td className="px-6 py-4 text-sm font-mono text-gray-400">{sale.transaction_id.slice(0, 8)}...</td>
-                  <td className="px-6 py-4">{sale.date}</td>
-                  <td className="px-6 py-4 font-mono text-primary">{sale.product_id}</td>
-                  <td className="px-6 py-4">{sale.quantity_sold}</td>
-                  <td className="px-6 py-4">₹{sale.total_amount?.toLocaleString()}</td>
-                  <td className="px-6 py-4">
-                    <span className="px-2 py-1 rounded-full text-xs bg-gray-800 text-gray-300">
-                      {sale.customer_type}
-                    </span>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>);
 
