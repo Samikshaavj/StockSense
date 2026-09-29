@@ -5,13 +5,29 @@ import { AlertTriangle, TrendingDown, Clock, Package, PlusCircle, ArrowDownCircl
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [stockRisk, setStockRisk] = useState([]);
-  const [reorderRecs, setReorderRecs] = useState([]);
-  const [deadStock, setDeadStock] = useState([]);
+  const [stockRisk, setStockRisk] = useState(() => JSON.parse(localStorage.getItem('stockRisk')) || []);
+  const [reorderRecs, setReorderRecs] = useState(() => JSON.parse(localStorage.getItem('reorderRecs')) || []);
+  const [deadStock, setDeadStock] = useState(() => JSON.parse(localStorage.getItem('deadStock')) || []);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    getStockRisk().then((res) => setStockRisk(res.data.filter((r) => r.risk_level === 'Critical' || r.risk_level === 'High')));
-    getReorderRecs().then((res) => setReorderRecs(res.data.filter((r) => r.status === 'Reorder Now')));
-    getDeadStock().then((res) => setDeadStock(res.data.filter((d) => d.status === 'Dead Stock')));
+    Promise.all([
+      getStockRisk().then((res) => {
+        const data = res.data.filter((r) => r.risk_level === 'Critical' || r.risk_level === 'High');
+        setStockRisk(data);
+        localStorage.setItem('stockRisk', JSON.stringify(data));
+      }),
+      getReorderRecs().then((res) => {
+        const data = res.data.filter((r) => r.status === 'Reorder Now');
+        setReorderRecs(data);
+        localStorage.setItem('reorderRecs', JSON.stringify(data));
+      }),
+      getDeadStock().then((res) => {
+        const data = res.data.filter((d) => d.status === 'Dead Stock');
+        setDeadStock(data);
+        localStorage.setItem('deadStock', JSON.stringify(data));
+      })
+    ]).finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -93,9 +109,14 @@ const Dashboard = () => {
                     <td className="py-4 text-danger font-medium">{risk.days_remaining.toFixed(1)} days</td>
                   </tr>
                 )}
-                {stockRisk.length === 0 &&
+                {stockRisk.length === 0 && !isLoading &&
                 <tr>
                     <td colSpan={3} className="py-4 text-gray-500 text-center">No critical risks currently.</td>
+                  </tr>
+                }
+                {stockRisk.length === 0 && isLoading &&
+                <tr>
+                    <td colSpan={3} className="py-4 text-gray-500 text-center">Loading critical risks...</td>
                   </tr>
                 }
               </tbody>
@@ -127,9 +148,14 @@ const Dashboard = () => {
                     <td className="py-4 text-warning font-medium">+{rec.recommended_reorder_quantity}</td>
                   </tr>
                 )}
-                {reorderRecs.length === 0 &&
+                {reorderRecs.length === 0 && !isLoading &&
                 <tr>
                     <td colSpan={3} className="py-4 text-gray-500 text-center">No actionable reorders right now.</td>
+                  </tr>
+                }
+                {reorderRecs.length === 0 && isLoading &&
+                <tr>
+                    <td colSpan={3} className="py-4 text-gray-500 text-center">Loading recommendations...</td>
                   </tr>
                 }
               </tbody>
