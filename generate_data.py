@@ -133,8 +133,8 @@ products_df_out = products_df.drop(columns=['speed'])
 products_df_out.to_csv("products.csv", index=False)
 
 # --- 3. SALES & INVENTORY ---
-start_date = datetime(2022, 1, 1)
-end_date = datetime.now()
+start_date = datetime(2024, 1, 1)
+end_date = datetime(2026, 8, 31)
 num_days = (end_date - start_date).days + 1
 date_list = [start_date + timedelta(days=x) for x in range(num_days)]
 
